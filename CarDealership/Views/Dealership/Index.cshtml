@@ -1,0 +1,23 @@
+@using Dealerships.Models;
+
+<h1>Search Results</h1>
+ 
+    @foreach (Car automobile in Cars)
+        @if (automobile.WorthBuying(maxPrice) && automobile.LowMileage(maxMiles))
+                {
+                    CarsMatchingSearch.Add(automobile);
+                }
+                else
+                {
+                Console.WriteLine("No cars match your criteria.");  
+                }
+            
+
+    @foreach (Car automobile in CarsMatchingSearch)
+            {
+                Console.WriteLine("----------------------");
+                Console.WriteLine(automobile.GetMakeModel());
+                Console.WriteLine(automobile.GetMiles()+ "miles");
+                Console.WriteLine("$" + automobile.GetPrice());
+                Console.WriteLine(Car.MakeSound("bang"));
+            }
