@@ -23,7 +23,7 @@ namespace Dealerships.Models
 
        
         
-        List<Car> CarsMatchingSearch = new List<Car>(0); 
+        
         
         public static string MakeSound(string sound)
         {
@@ -56,7 +56,7 @@ namespace Dealerships.Models
 
         public bool LowMileage(int maxMiles)
         {
-            return (_Miles < maxMiles);
+            return (Miles < maxMiles);
         }
     }
 

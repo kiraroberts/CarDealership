@@ -1,0 +1,20 @@
+@using Dealerships.Models;
+
+<h1>Search Results</h1>
+ 
+    @if (Model.Count = 0)
+    {
+    <p>No cars match your criteria.</p>
+    }
+    else
+    {
+    <ul>        
+     @foreach (Car automobile in Model)
+            {
+                <li>@automobile.MakeModel;</li>
+                <li>@automobile.Price;</li>
+                <li>@automobile.Miles;</li>
+
+            }
+    </ul>
+    }
