@@ -8,36 +8,43 @@ namespace Dealerships.Controllers
     public class DealershipsController : Controller 
     {
        
-        [HttpGet("/items")]
+        [HttpGet("/autos")]
         public ActionResult Index()
         {
+        Car volkswagen = new Car("1974 Volkswagen Thing", 1100, 368792);
+        Car yugo = new Car("1980 Yugo Koral", 700, 56000);
+        Car ford = new Car("1988 Ford Country Squire", 1400, 239001);
+        Car amc = new Car("1976 AMC Pacer", 400, 198000);
+        
 
-        List<Item> allItems = Item.GetAll();
+        List<Car> allItems = Car.GetAll();
         return View(allItems);
+        //gives access to all new car instances for the search
         }
 
-        [HttpGet("/search-result")]
+        [HttpGet("/autos/new")]
         public ActionResult CreateForm()
+        //this matches the name of the cshtml file
         {
             return View();
         }
 
 
-        [HttpGet("/search-result")]
-        public ActionResult Create(int maxPrice, int maxMiles)
+        [HttpPost("/autos")]
+        public ActionResult Search(int maxPrice, int maxMiles)
+        //this name doesn't matter because the Index redirect
         {
-            
-            Car volkswagen = new Car("1974 Volkswagen Thing", 1100, 368792, "great car");
-            Car yugo = new Car("1980 Yugo Koral", 700, 56000, "great car");
-            Car ford = new Car("1988 Ford Country Squire", 1400, 239001, "great car");
-            Car amc = new Car("1976 AMC Pacer", 400, 198000, "great car");
-            
-            
-            List <Car> Cars = new List <Car>() { volkswagen, yugo, ford, amc };
+            Car volkswagen = new Car("1974 Volkswagen Thing", 1100, 368792);
+            Car yugo = new Car("1980 Yugo Koral", 700, 56000);
+            Car ford = new Car("1988 Ford Country Squire", 1400, 239001);
+            Car amc = new Car("1976 AMC Pacer", 400, 198000);
+        
 
+            List<Car> allItems = Car.GetAll();
+            
             List<Car> CarsMatchingSearch = new List<Car>(0); 
 
-            foreach (Car automobile in Cars)
+            foreach (Car automobile in allItems)
             if (automobile.WorthBuying(maxPrice) && automobile.LowMileage(maxMiles))
                 {
                     CarsMatchingSearch.Add(automobile);
@@ -48,7 +55,8 @@ namespace Dealerships.Controllers
                 }
     
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",CarsMatchingSearch);
+            //With a Post method there is no view, this is the last command for where to send it, if it is View() it's showing the [HttpGet] 
         }
 
       
