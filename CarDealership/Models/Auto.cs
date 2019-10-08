@@ -21,9 +21,7 @@ namespace Dealerships.Models
             _instances.Add(this);
 
         }
-
-    
-       
+     
         public static List<Car> GetAll()
         {
         return _instances;
